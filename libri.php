@@ -7,7 +7,6 @@
 
     switch($request_method){
         case "GET":
-            //codice del GET
             
             $stmt = $pdo->query("SELECT * FROM libri");
             $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -17,12 +16,11 @@
             break;
 
         case "POST":
-            //codice del POST
+            
             $data = json_decode (file_get_contents("php://input"), true);
 
             if (isset($data["titolo"]) && isset($data["autore"]) && isset($data["anno"])) {
                 
-                //se ID autoincrement basta rimuovere ID da qua
                 $stmt = $pdo->prepare("
                     INSERT INTO libri (titolo, autore, anno)
                     VALUES (?,?,?)
@@ -49,7 +47,6 @@
             break;
 
         case "DELETE":
-            //codice del DELETE
             
             $data = json_decode(file_get_contents("php://input"), true);
 
@@ -79,8 +76,7 @@
             break;
 
         case "PUT":
-            //codice del PUT
-            //TODO mettere il controllo ID
+
             $data = json_decode(file_get_contents("php://input"), true);
 
             if (isset($data["id"]) && isset($data["titolo"]) && isset($data["autore"]) && isset($data["anno"])) {
